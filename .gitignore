@@ -1,0 +1,7 @@
+ECDICT/
+ecdict_bin/
+
+.claude/
+
+translate
+translate-linux-x64.tar.gz
