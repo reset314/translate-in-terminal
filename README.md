@@ -14,6 +14,11 @@ output <word>
 因为使用了剪枝，输出会剪掉levenshtein步数过多的word可以修改变量修改该剪枝界限
 分片脚本为./fp.py分片的词典为ecdict.csv可以修改分片使得修改翻译语言等目标
 合法时目前只输出释义没有输出变形，词性，音标等可以修改，变形的存储还是遵循字典项目需要处理后输出
+## 构建发布版
+```bash
+g++ -std=c++17 -O2 main.cpp ShardLoader.cpp -o translate
+tar czf translate-linux-x64.tar.gz translate data/
+```
 ## About
 英语字典项目地址：
 https://github.com/skywind3000/ECDICT
