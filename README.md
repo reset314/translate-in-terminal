@@ -1,9 +1,14 @@
 # TRANSLATE-IN-TERMINAL
 ## 项目概述
-一个在终端中的翻译软件（字典映射）
+一个在linux终端中的翻译软件（字典映射）
 ## 实现
 将英语字典按照前两字符分片存储为bin文件，
 线性遍历所有word根据levenshtein计算相似度然后返回
+## 安装
+```bash
+curl -LO https://github.com/reset314/translate-in-terminal/releases/latest/download/install.sh
+sudo bash install.sh
+```
 ## 使用
 编译打包后输出文件output
 直接
