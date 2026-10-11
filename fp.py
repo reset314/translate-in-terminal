@@ -2,24 +2,25 @@ import os
 import csv
 import struct
 
-bins = { f"{c1}{c2}": [] for c1 in 'abcdefghijklmnopqrstuvwxyz' for c2 in 'abcdefghijklmnopqrstuvwxyz' }
+bins = { f"{c1}{c2}": [] for c1 in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' for c2 in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' }
 bin_other = []
 
 def sort_by_word():
-    for c1 in 'abcdefghijklmnopqrstuvwxyz':
-        for c2 in 'abcdefghijklmnopqrstuvwxyz':
+    for c1 in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ':
+        for c2 in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ':
             key = f"{c1}{c2}"
             bins[key] = sorted(bins[key], key=lambda x: x[0])
 
 
 # stardict
-with open("./ECDICT/ecdict.csv", newline = '') as f:
+with open("./ECDICT/ecdict.csv", newline = '', encoding='utf-8') as f:
     reader = csv.reader(f)
     for row in reader:
         word_v = row[0]
         index_word = word_v[:2]
         if len(word_v) < 2:
             bin_other.append((row[0], row[1], row[2], row[3], row[4], row[10]))
+            continue
         if index_word in bins:
             bins[index_word].append((row[0], row[1], row[2], row[3], row[4], row[10]))
         else:
@@ -82,6 +83,7 @@ def write_bin(key, entries):
         exchange_pos += len(d[5])
 
     filename = f"./ecdict_bin/{key}.bin"
+    os.makedirs("./ecdict_bin", exist_ok=True)
     with open(filename, 'wb') as f:
         f.write(struct.pack('<I I I I I I I I',
                             0x44494354,
@@ -100,8 +102,8 @@ def write_bin(key, entries):
         f.write(exchange_pool)
         f.write(index_data)
 
-for c1 in 'abcdefghijklmnopqrstuvwxyz':
-    for c2 in 'abcdefghijklmnopqrstuvwxyz':
+for c1 in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ':
+    for c2 in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ':
         key = f"{c1}{c2}"
         write_bin(key, bins[key])
 
