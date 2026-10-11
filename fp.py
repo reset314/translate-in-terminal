@@ -82,8 +82,8 @@ def write_bin(key, entries):
         pos_pos += len(d[4])
         exchange_pos += len(d[5])
 
-    filename = f"./ecdict_bin/{key}.bin"
-    os.makedirs("./ecdict_bin", exist_ok=True)
+    filename = f"./data/{key}.bin"
+    os.makedirs("./data", exist_ok=True)
     with open(filename, 'wb') as f:
         f.write(struct.pack('<I I I I I I I I',
                             0x44494354,
